@@ -13,16 +13,33 @@ struct ContentView: View {
   @State var showGuide: Bool = false
   @State var showInfo: Bool = false
   
+  var cardViews: [CardView] = {
+    var views = [CardView]()
+    for honeymoon in honeymoonData {
+      views.append(CardView(honeymoon: honeymoon))
+    }
+    return views
+  }()
+  
   var body: some View {
     VStack {
+      // MARK: - Header
       HeaderView(showGuideView: $showGuide, showInfoView: $showInfo)
       
       Spacer()
       
-      CardView(honeymoon: honeymoonData[2])
-        .padding()
+      // MARK: - Cards
+      ZStack {
+        ForEach(cardViews) { cardView in
+          cardView
+        }
+      }
+      .padding(.horizontal)
+     
       
       Spacer()
+      
+      // MARK: - Footer
       FooterView(showBookingAlert: $showAlert)
     }
     .alert(isPresented: $showAlert) {

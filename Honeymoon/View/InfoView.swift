@@ -38,7 +38,6 @@ struct InfoView: View {
           Text("Continue".uppercased())
             .modifier(ButtonModifier())
         }
-
         
       }
       .frame(minWidth: 0, maxWidth: .infinity)
